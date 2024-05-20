@@ -1,0 +1,25 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python Distributed Training",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "8,9",
+                "torch.distributed.launch": "1",
+                "--nproc_per_node":"4"
+            },
+            "args": [
+                "--arch", "UNet",
+                "--dataset", "cifar10",
+                "--class-cond",
+                "--epochs", "100",
+                "--batch-size", "1024",
+                "--pretrained-ckpt", "./trained_models/UNet_cifar10-eopch_200-timesteps_1000-class_condn_True.pt"
+            ]
+        }
+    ]
+}
